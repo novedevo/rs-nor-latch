@@ -3,8 +3,10 @@ mod token;
 
 #[cfg(test)]
 mod tests {
+    use crate::*;
+
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn basic_test() {
+        println!("{:?}", lexer::lex("( A NAND B ) XOR ( A NOR C ) = Q"));
     }
 }

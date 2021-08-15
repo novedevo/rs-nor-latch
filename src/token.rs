@@ -1,9 +1,10 @@
 use std::str::FromStr;
 
+#[derive(Debug)]
 pub enum Token {
     OpenParen,
     CloseParen,
-    Letter,
+    Letter(char),
     And,
     Or,
     Xor,
@@ -29,7 +30,13 @@ impl FromStr for Token {
             "nor" => Nor,
             "xnor" => Xnor,
             "equals" | "=" => Equals,
-            _ => unreachable!(),
+            _ => {
+                if s.len() == 1 && s.is_ascii() {
+                    Letter(s.chars().next().unwrap())
+                } else {
+                    unreachable!()
+                }
+            }
         })
     }
 }
